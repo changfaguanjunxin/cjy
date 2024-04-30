@@ -1,0 +1,110 @@
+#include "pch.h"
+#include "CppUnitTest.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace UnitTest1
+{
+	TEST_CLASS(UnitTest1)
+	{
+	public:
+
+		TEST_METHOD(TestMethod1)
+		{
+			Assert::AreEqual(5, inter(1, 4, 1));
+			Assert::AreEqual(-2, inter(2, 4, 2));
+			Assert::AreEqual(6, inter(1, 6, 3));
+			Assert::AreEqual(4, inter(52, 13, 4));
+
+			Assert::AreEqual(-3,ceshi(4, 1, 3, 3, 2));
+			Assert::AreEqual(0,ceshi(4, 2, 3, 3, 2));
+
+			Assert::AreEqual(5,ceshi(9, 1, 2, 3, 1));
+			Assert::AreEqual(2,ceshi(9, 2, 3, 3, 3));
+
+			Assert::AreEqual(2,ceshi(10, 1, 3, 3, 3));
+			Assert::AreEqual(17,ceshi(2, 2, 54, 3, 3));
+
+			Assert::AreEqual(63, ceshi(61, 1, 54, 3, 3));
+			Assert::AreEqual(24, ceshi(7, 2, 5, 3, 3));
+		}
+		 int inter(int a, int b, int fuhao)
+		 {
+			int x;
+			char c;
+			if (fuhao == 1)   
+			{
+				c = '+';
+				x = a + b;
+			}
+			else if (fuhao == 2)
+			{
+				c = '-';
+				x = a - b;
+			}
+			else if (fuhao == 3)
+			{
+				c = '*';
+				x = a * b;
+			}
+			else if (fuhao == 4)
+			{
+				c = '/';
+				x = a / b;
+			}
+			return x;
+		  }
+		 int ceshi(int i, int parenthese, int a, int b, int c)
+		 {
+			 char d, e;
+			 int x;
+			 if (i % 4 == 0)       //(4,1,3,3,2)
+			 { // a-b*c, (a-b)*c
+				 d = '-';
+				 e = '*';
+				 if (parenthese == 1) { // 无括号
+					 x = a - b * c;
+				 }
+				 else { // 有括号
+					 x = (a - b) * c;
+				 }
+			 }
+			 else if (i % 3 == 0)
+			 { // a+b/c, (a+b)/c
+				 d = '+';
+				 e = '/';
+				 if (parenthese == 1) {
+					 x = a + b / c;
+				 }
+				 else {
+					 x = (a + b) / c;
+				 }
+			 }
+			 else if (i % 2 == 0)
+			 { // a-b/c, (a-b)/c
+				 d = '-';
+				 e = '/';
+				 if (parenthese == 1) {
+					 x = a - b / c;
+				 }
+				 else {
+					 x = (a - b) / c;
+				 }
+			 }
+			 else
+			 { // a+b*c, (a+b)*c
+				 d = '+';
+				 e = '*';
+				 if (parenthese == 1)
+				 {
+					 x = a + b * c;
+				 }
+				 else
+				 {
+					 x = (a + b) * c;
+				 }
+			 }
+			 return x;
+		 }
+	};
+}
